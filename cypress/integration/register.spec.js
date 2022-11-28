@@ -3,15 +3,17 @@ describe("Cadastro de usuário", function () {
     cy.visit("/treinamento/home");
   });
 
-  it("Criar novo usuário", function () {
-    cy.get("a:contains(Formulário)")
-      .click();
-    cy.get('a:contains(Criar Usuários)')
-      .click()
-    
-    cy.get('h5[class="center"]')
-      .should('have.text', 'Novo Usuário!!')
-
+  it("Criar novo usuário com sucesso", function () {
+    cy.AcessaTelaCriarUsuario()
+    cy.newUserValid()
+    cy.get('p[id="notice"]').should('be.visible')
   });
+
+  it('Criar novo com erro', function(){
+    cy.AcessaTelaCriarUsuario()
+    cy.newUserInvalid()
+
+    cy.get('div[id="error_explanation"]').should('be.visible')
+  })
 
 });

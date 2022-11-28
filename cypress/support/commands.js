@@ -1,25 +1,33 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add("AcessaTelaCriarUsuario", () => {
+  cy.get("a:contains(Formulário)").click();
+  cy.get("a:contains(Criar Usuários)").click();
+  cy.get('h5[class="center"]')
+    .should("have.text", "Novo Usuário!!");
+});
+
+
+Cypress.Commands.add("newUserValid", () => {
+  cy.get('input[id="user_name"]')
+  .type('Jude')
+cy.get('input[id="user_lastname"]')
+  .type('Duarte')
+cy.get('input[id="user_email"]')
+  .type('jude_duarte@gmail.com')
+cy.get('input[id="user_address"]')
+  .type('São Paulo')
+cy.get('input[id="user_university"]')
+  .type('MIT')
+cy.get('input[id="user_profile"]')
+  .type('Professora')
+cy.get('input[id="user_gender"]')
+  .type('Feminino')
+cy.get('input[id="user_age"]')
+  .type('22')
+cy.get('input[type="submit"]').click()
+});
+
+
+Cypress.Commands.add("newUserInvalid", () => {
+  cy.get('input[id="user_name"]').type('Ada')
+  cy.get('input[type="submit"]').click()
+})
